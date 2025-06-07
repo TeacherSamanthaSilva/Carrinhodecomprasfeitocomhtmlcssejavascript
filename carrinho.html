@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrinho de Compras</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f6f6;
+      padding: 30px;
+    }
+
+    .carrinho {
+      max-width: 500px;
+      margin: auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .produto {
+      margin-bottom: 15px;
+    }
+
+    .produto span {
+      display: block;
+      margin: 5px 0;
+    }
+
+    .resultado {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .resultado span {
+      display: block;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="carrinho">
+    <h2>Carrinho de Compras</h2>
+
+    <div class="produto">
+      <span><strong>Produto:</strong> Camiseta</span>
+      <span><strong>Preço:</strong> R$ 50.00</span>
+      <span><strong>Quantidade:</strong> 2</span>
+    </div>
+
+    <div class="produto">
+      <span><strong>Produto:</strong> Tênis</span>
+      <span><strong>Preço:</strong> R$ 120.00</span>
+      <span><strong>Quantidade:</strong> 1</span>
+    </div>
+
+    <div class="produto">
+      <span><strong>Produto:</strong> Boné</span>
+      <span><strong>Preço:</strong> R$ 30.00</span>
+      <span><strong>Quantidade:</strong> 3</span>
+    </div>
+
+    <div class="resultado" id="resumo"></div>
+  </div>
+
+  <script>
+    // Produtos do carrinho
+    const carrinho = [
+      { nome: "Camiseta", preco: 50.00, quantidade: 2 },
+      { nome: "Tênis", preco: 120.00, quantidade: 1 },
+      { nome: "Boné", preco: 30.00, quantidade: 3 }
+    ];
+
+    // Calcula total do carrinho
+    function calcularTotal(produtos) {
+      let total = 0;
+      for (let i = 0; i < produtos.length; i++) {
+        total += produtos[i].preco * produtos[i].quantidade;
+      }
+      return total;
+    }
+
+    // Aplica desconto em porcentagem
+    function aplicarDesconto(valor, percentual) {
+      let desconto = valor * (percentual / 100);
+      return valor - desconto;
+    }
+
+    // Mostra resultado na tela
+    const totalSemDesconto = calcularTotal(carrinho);
+    const totalComDesconto = aplicarDesconto(totalSemDesconto, 10); // 10%
+
+    const resumo = document.getElementById("resumo");
+    resumo.innerHTML = `
+      <span>Total sem desconto: R$ ${totalSemDesconto.toFixed(2)}</span>
+      <span>Total com 10% de desconto: R$ ${totalComDesconto.toFixed(2)}</span>
+    `;
+  </script>
+
+</body>
+</html>
